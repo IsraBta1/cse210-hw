@@ -1,3 +1,5 @@
+using System;
+
 public class Entry
 {
     public string _date;
@@ -6,6 +8,7 @@ public class Entry
 
     public void Display()
     {
-       
+        Console.WriteLine($"{_date} - {_promptText}");
+        Console.WriteLine(_entryText);
     }
 }
