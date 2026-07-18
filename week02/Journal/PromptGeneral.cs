@@ -4,6 +4,6 @@ public class PromptGenerator
 
    public void GetRandomPrompt()
    {
-        
+        return "";
     }
 }
