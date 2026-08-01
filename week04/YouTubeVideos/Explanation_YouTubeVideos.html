@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explanation of the YouTube Videos Project, covering object-oriented programming concepts like abstraction, encapsulation, and class relationships." />
+  <meta name="keywords" content="YouTube Videos, Object-Oriented Programming, Abstraction, Encapsulation, Class Relationships, C# Project" />           
+  <meta name="author" content="Israel Betancourt" />
+  <title>Explanation of the YouTube Videos Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      background: #f4f5f7;
+      color: #222;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px 40px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      border-radius: 10px;
+    }
+
+    h1, h2, h3 {
+      color: #1d3557;
+    }
+
+    code {
+      background: black;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.98em;
+    }
+
+    pre {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+
+    .note {
+      background: #e0f2fe;
+      border-left: 5px solid #0284c7;
+      padding: 10px 15px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Explanation of the YouTube Videos Project</h1>
+
+    <h2>1. Objective of the exercise</h2>
+    <p>
+      This project follows the idea of week 4 of the course: practicing object-oriented programming with the concepts of <strong>abstraction</strong>, <strong>encapsulation</strong>, and <strong>class relationships</strong>.
+    </p>
+    <p>
+      The assignment asks us to create a program to store information about videos and the comments that appear on them. There is no need to create a menu-based system; instead, we create objects, assign values, and display them in the console.
+    </p>
+
+    <div class="note">
+      The key idea is that each class represents a real-world part of the problem, and each one has a clear responsibility.
+    </div>
+
+    <h2>2. Relationship between classes</h2>
+    <p>
+      In this exercise, two main classes are used: <strong>Video</strong> and <strong>Comment</strong>.
+    </p>
+    <ul>
+      <li>A video has a title, author, duration, and a list of comments.</li>
+      <li>Each comment contains the name of the person and the text of the comment.</li>
+      <li>A video can contain several comments.</li>
+    </ul>
+    <p>
+      This relationship is called <strong>composition</strong>: a video is made up of many comments.
+    </p>
+
+    <h2>3. Comment class</h2>
+    <pre><code>public class Comment
+{
+    private string _commenterName;
+    private string _text;
+
+    public Comment(string commenterName, string text)
+    {
+        _commenterName = commenterName;
+        _text = text;
+    }
+
+    public string CommenterName
+    {
+        get { return _commenterName; }
+    }
+
+    public string Text
+    {
+        get { return _text; }
+    }
+}</code></pre>
+
+    <p>
+      This class stores the information for each comment:
+    </p>
+    <ul>
+      <li><code>_commenterName</code>: the name of the person who commented.</li>
+      <li><code>_text</code>: the content of the comment.</li>
+    </ul>
+    <p>
+      The attributes are private; this protects the data and only allows access through public properties.
+    </p>
+
+    <h2>4. Video class</h2>
+    <pre><code>public class Video
+{
+    private string _title;
+    private string _author;
+    private int _lengthInSeconds;
+    private List&lt;Comment&gt; _comments;
+
+    public Video(string title, string author, int lengthInSeconds)
+    {
+        _title = title;
+        _author = author;
+        _lengthInSeconds = lengthInSeconds;
+        _comments = new List&lt;Comment&gt;();
+    }
+
+    public string Title
+    {
+        get { return _title; }
+    }
+
+    public string Author
+    {
+        get { return _author; }
+    }
+
+    public int LengthInSeconds
+    {
+        get { return _lengthInSeconds; }
+    }
+
+    public List&lt;Comment&gt; Comments
+    {
+        get { return _comments; }
+    }
+
+    public void AddComment(Comment comment)
+    {
+        _comments.Add(comment);
+    }
+
+    public int GetCommentCount()
+    {
+        return _comments.Count;
+    }
+
+    public string GetFormattedDuration()
+    {
+        int minutes = _lengthInSeconds / 60;
+        int seconds = _lengthInSeconds % 60;
+        return $"{minutes} min {seconds} sec";
+    }
+}</code></pre>
+
+    <p>
+      This class represents a video with the following data:
+    </p>
+    <ul>
+      <li>title</li>
+      <li>author</li>
+      <li>duration in seconds</li>
+      <li>list of comments</li>
+    </ul>
+    <p>
+      In addition, the class has important methods:
+    </p>
+    <ul>
+      <li><code>AddComment</code>: adds a comment to the list.</li>
+      <li><code>GetCommentCount</code>: returns how many comments the video has.</li>
+      <li><code>GetFormattedDuration</code>: converts the duration into a readable format, such as 7 min 0 sec.</li>
+    </ul>
+
+    <h2>5. Main logic in Program.cs</h2>
+    <pre><code>class Program
+{
+    static void Main(string[] args)
+    {
+        List&lt;Video&gt; videos = new List&lt;Video&gt;();
+
+        Video video1 = new Video("The History of C#", "Carlos Ruiz", 420);
+        video1.AddComment(new Comment("Ana", "Very useful explanation."));
+        video1.AddComment(new Comment("Luis", "I liked the examples."));
+        video1.AddComment(new Comment("María", "This helped me understand classes."));
+        videos.Add(video1);
+
+        foreach (Video video in videos)
+        {
+            Console.WriteLine($"Title: {video.Title}");
+            Console.WriteLine($"Author: {video.Author}");
+            Console.WriteLine($"Duration: {video.GetFormattedDuration()}");
+            Console.WriteLine($"Comments: {video.GetCommentCount()}");
+
+            foreach (Comment comment in video.Comments)
+            {
+                Console.WriteLine($"  - {comment.CommenterName}: {comment.Text}");
+            }
+        }
+    }
+}</code></pre>
+
+    <p>
+      This is the most important part of the program:
+    </p>
+    <ol>
+      <li>A list called <code>videos</code> is created.</li>
+      <li>Several objects of type <code>Video</code> are instantiated.</li>
+      <li>Comments are added using <code>AddComment</code>.</li>
+      <li>The list is iterated with <code>foreach</code>.</li>
+      <li>The title, author, duration, and comments of each video are displayed.</li>
+    </ol>
+
+    <h2>6. What does Abstraction mean?</h2>
+    <p>
+      Abstraction means including only the data that is truly necessary to solve the problem.
+    </p>
+    <p>
+      In this case, we do not need to store any extra information. We only need:
+    </p>
+    <ul>
+      <li>title</li>
+      <li>author</li>
+      <li>duration</li>
+      <li>comments</li>
+    </ul>
+
+    <h2>7. What does Encapsulation mean?</h2>
+    <p>
+      Encapsulation refers to protecting the internal data of a class using private attributes and allowing access only through methods or properties.
+    </p>
+    <p>
+      This makes the program safer and more organized. If someone wants to change or read a value, they must do it in the controlled way that the class provides.
+    </p>
+
+    <h2>8. What does Composition mean?</h2>
+    <p>
+      Composition is when one class contains other classes inside it. In this exercise, <code>Video</code> contains a list of <code>Comment</code>.
+    </p>
+    <p>
+      This represents a real-world relationship: a video can have many comments associated with it.
+    </p>
+
+    <h2>9. Final summary</h2>
+    <p>
+      This exercise demonstrates how to organize real-world information into classes with defined responsibilities. Instead of storing each piece of data separately, each element has meaning inside an object.
+    </p>
+    <p>
+      In the end, the result is a clearer, easier-to-maintain program that is ready to grow in the future.
+    </p>
+  </div>
+</body>
+</html>
