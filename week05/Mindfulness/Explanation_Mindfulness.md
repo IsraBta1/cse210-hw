@@ -24,6 +24,12 @@ The abstract `Activity` class stores the common information for every activity:
 
 It also provides shared methods for displaying the starting and ending messages, showing a spinner animation, displaying countdowns, and reading a valid session duration from the user.
 
+The shared fields are protected and use the required naming convention:
+
+- `_name` stores the activity name.
+- `_description` stores the activity description.
+- `_duration` stores the selected session length.
+
 The three activity classes inherit from `Activity` and override the `Run()` method with their own behavior. This demonstrates polymorphism because each activity can be used through the same general activity structure while performing a different task.
 
 ## Breathing Activity
@@ -52,9 +58,21 @@ The application validates the menu selection and only accepts positive whole num
 6. A completion message is displayed.
 7. The program returns to the main menu.
 
+## Rubric Alignment
+
+The implementation addresses the main rubric requirements:
+
+- **Abstraction:** `Activity` is an abstract class that defines the common activity structure.
+- **Encapsulation:** Shared fields are protected, and activity-specific prompt and question lists are private.
+- **Inheritance:** All three activity classes derive from `Activity`.
+- **Inherited attributes:** The name, description, and duration are defined in the base class and reused by derived classes.
+- **Inherited behaviors:** Starting messages, ending messages, countdowns, spinners, and duration input are implemented once in the base class.
+- **Naming conventions:** Classes and methods use PascalCase, while member fields use underscoreCamelCase.
+- **File organization:** Each class is stored in its own C# file.
+
 ## Verification
 
-The project was compiled using the `Mindfulness.csproj` file with .NET 10. The build completed successfully, and no errors were reported in the source files.
+The project was compiled using the `Mindfulness.csproj` file with .NET 10. The build completed successfully after the classes were separated into individual files and the shared fields were aligned with the rubric naming convention. No errors were reported in the source files.
 
 ## Conclusion
 
