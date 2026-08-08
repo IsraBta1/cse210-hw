@@ -29,7 +29,7 @@ class ListingActivity : Activity
 
         Stopwatch timer = Stopwatch.StartNew();
         int count = 0;
-        while (timer.Elapsed.TotalSeconds < Duration)
+        while (timer.Elapsed.TotalSeconds < _duration)
         {
             Console.Write(" ");
             string response = Console.ReadLine();

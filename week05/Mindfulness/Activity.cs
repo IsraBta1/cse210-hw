@@ -1,13 +1,13 @@
 abstract class Activity
 {
-    protected string Name { get; }
-    protected string Description { get; }
-    protected int Duration { get; private set; }
+    protected string _name;
+    protected string _description;
+    protected int _duration;
 
     protected Activity(string name, string description)
     {
-        Name = name;
-        Description = description;
+        _name = name;
+        _description = description;
     }
 
     public abstract void Run();
@@ -15,11 +15,11 @@ abstract class Activity
     protected void DisplayStartingMessage()
     {
         Console.Clear();
-        Console.WriteLine($"Starting {Name}");
+        Console.WriteLine($"Starting {_name}");
         Console.WriteLine();
-        Console.WriteLine(Description);
+        Console.WriteLine(_description);
         Console.WriteLine();
-        Duration = ReadDuration();
+        _duration = ReadDuration();
         Console.Clear();
         Console.WriteLine("Get ready...");
         ShowSpinner(3);
@@ -29,7 +29,7 @@ abstract class Activity
     {
         Console.WriteLine();
         Console.WriteLine("Well done!!");
-        Console.WriteLine($"You have completed another {Duration} seconds of the {Name}.");
+        Console.WriteLine($"You have completed another {_duration} seconds of the {_name}.");
         ShowSpinner(3);
     }
 

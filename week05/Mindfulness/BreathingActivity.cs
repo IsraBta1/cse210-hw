@@ -11,18 +11,18 @@ class BreathingActivity : Activity
     {
         DisplayStartingMessage();
         Stopwatch timer = Stopwatch.StartNew();
-        while (timer.Elapsed.TotalSeconds < Duration)
+        while (timer.Elapsed.TotalSeconds < _duration)
         {
-            int remaining = Duration - (int)timer.Elapsed.TotalSeconds;
+            int remaining = _duration - (int)timer.Elapsed.TotalSeconds;
             int inhaleSeconds = Math.Min(4, remaining);
             Console.Write("\nBreathe in... ");
             ShowCountDown(inhaleSeconds);
-            if (timer.Elapsed.TotalSeconds >= Duration)
+            if (timer.Elapsed.TotalSeconds >= _duration)
             {
                 break;
             }
 
-            remaining = Duration - (int)timer.Elapsed.TotalSeconds;
+            remaining = _duration - (int)timer.Elapsed.TotalSeconds;
             int exhaleSeconds = Math.Min(6, remaining);
             Console.Write("\nNow breathe out... ");
             ShowCountDown(exhaleSeconds);

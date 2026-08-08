@@ -39,7 +39,7 @@ class ReflectingActivity : Activity
 
         Stopwatch timer = Stopwatch.StartNew();
         List<string> availableQuestions = new(_questions);
-        while (timer.Elapsed.TotalSeconds < Duration)
+        while (timer.Elapsed.TotalSeconds < _duration)
         {
             if (availableQuestions.Count == 0)
             {
